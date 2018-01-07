@@ -22,6 +22,10 @@ int main()
 				std::cerr << "START was executed already" << std::endl;
 				return 1;
 			}
+			if (command.length() == 5) {
+				std::cerr << "No arguments given" << std::endl;
+				return 1;
+			}
 
 			uint8_t side;
 			auto cmd_args = command.substr(index, command.npos - index);
@@ -49,6 +53,10 @@ int main()
 				std::cerr << "Run START before MOVE" << std::endl;
 				return 1;
 			}
+			if (command.length() == 4) {
+				std::cerr << "No arguments given" << std::endl;
+				return 1;
+			}
 
 			auto cmd_args = command.substr(index, command.npos - index);
 			std::istringstream ss(cmd_args);
@@ -56,6 +64,11 @@ int main()
 				cell13, cell14;
 			ss >> cell1 >> cell2 >> cell3 >> cell4 >> cell5 >> cell6 >> cell7 >> cell8 >> cell9 >> cell10 >>
 				cell11 >> cell12 >> cell13 >> cell14;
+			if (ss.fail()) {
+				std::cerr << "Error reading board values (should be 14 integers)" << std::endl;
+				return 1;
+			}
+
 			BoardState bs(player, cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10,
 				cell11, cell12, cell13, cell14);
 
